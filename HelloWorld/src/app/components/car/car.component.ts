@@ -9,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class CarComponent implements OnInit {
   maxAcceleration: number;
   minAcceleration: number;
+  minHeight: number;
+  maxHeight: number;
   fieldWidth: number;
 
   info: string;
   speed: number;
+  speedIncrement: number;
   acceleration: number;
   model: string;
   position: HasPosition;
@@ -20,17 +23,22 @@ export class CarComponent implements OnInit {
   enginLable: string;
   isFly: boolean;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
     this.maxAcceleration = 5;
     this.minAcceleration = 1;
     this.fieldWidth = 200;
-    this.enginLable = 'START';
+    this.minHeight = 10;
+    this.maxHeight = 100;
     this.isFly = false;
 
+    this.enginLable = 'START';
     this.info = 'stay on ground';
     this.speed = 0;
+    this.speedIncrement = 5;
     this.acceleration = this.minAcceleration;
     this.model = "GH-700";
     this.position = {
@@ -46,6 +54,7 @@ export class CarComponent implements OnInit {
   }
 
   fly() {
+    var movement;
     this.acceleration = this.minAcceleration;
 
     if(this.isFly) {
@@ -56,7 +65,7 @@ export class CarComponent implements OnInit {
     } else {
       this.info = 'engin started';
       this.enginLable = "STOP";
-      this.position.y = 10;
+      this.position.y = this.minHeight;
     }
 
     this.isFly = !this.isFly;
@@ -65,10 +74,6 @@ export class CarComponent implements OnInit {
   accelerate(isIncreace:boolean) {
     if (this.isFly) {
       if (isIncreace) {
-        this.speed = this.speed == 0
-          ? this.speed = 1
-          : this.speed;
-
         this.acceleration = this.acceleration == this.maxAcceleration
           ? this.acceleration
           : this.acceleration + 1;
@@ -77,6 +82,8 @@ export class CarComponent implements OnInit {
           ? this.acceleration
           : this.acceleration - 1;
       }
+
+      this.speed = this.speed = this.speedIncrement * this.acceleration;
     } else {
       this.info = 'vehicle still stay on ground, start engin before fly';
     }
@@ -95,11 +102,59 @@ export class CarComponent implements OnInit {
       }
     } else {
       if (isLeft) {
-        this.info = 'left door is open';
+        this.info = 'vehicle still stay on ground, start engin before sly left';
       } else {
-        this.info = 'right door is open';
+        this.info = 'vehicle still stay on ground, start engin before sly right';
       }
     }
+  }
+
+  verticalMovement(isUp:boolean) {
+    if (this.isFly) {
+      if (isUp) {
+        this.position.y = this.position.y == this.maxHeight
+          ? this.position.y
+          : this.position.y + 1;
+      } else {
+        this.position.y = this.position.y == this.minHeight
+          ? this.position.y
+          : this.position.y - 1;
+      }
+    } else {
+      if (isUp) {
+        this.info = 'vehicle still stay on ground, start engin before fly up';
+      } else {
+        this.info = 'vehicle still stay on ground, start engin before get down';
+      }
+    }
+  }
+
+  moveForvard() {
+    if (this.isFly) {
+      this.position.z = this.position.z + this.speed;
+    }
+  }
+
+  openDoors(isLeft:boolean) {
+    if (isLeft) {
+      this.info = 'left door is open';
+    } else {
+      this.info = 'right door is open';
+    }
+  }
+
+  loadItem(item: string) {
+    if (!this.isFly) {
+      this.cargo.push(item);
+    } else {
+      this.info = 'stop engin before load cargo';
+    }
+
+    return false; //if we don't return false from this function, we reload all page because we use this functuion in form
+  }
+
+  unloadItem(index: number) {
+    this.cargo.splice(index, 1);
   }
 }
 

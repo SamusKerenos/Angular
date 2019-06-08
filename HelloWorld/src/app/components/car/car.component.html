@@ -1,5 +1,5 @@
 <div class="car">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-4">
         <div class="alert alert-info">
@@ -37,6 +37,25 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-info">
+              <form (submit)="loadItem(cargoItem.value)">
+                <div class="form-group">
+                  <label for="cargo">Cargo item:</label>
+                  <div class="row">
+                    <div class="col-10">
+                      <input class="form-control" type="text" placeholder="input cargo specification" #cargoItem>
+                    </div>
+                    <div class="col-2">
+                      <button class="btn btn-primary" type="submit">LOAD</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col">
         <div class="alert alert-info">
@@ -54,13 +73,31 @@
         <div class="row">
           <div class="col">
             <div class="alert alert-info">
-              <div class="btn-group">
-                <button class="btn btn-secondary" (click)="horizontalMovement(true)">LEFT</button>
-                <button class="btn btn-secondary" (click)="horizontalMovement(false)">RIGHT</button>
+              <div class="row">
+                <div class="col">
+                  <div class="btn-group">
+                    <button class="btn btn-secondary" (click)="horizontalMovement(true)">L</button>
+                    <button class="btn btn-secondary" (click)="verticalMovement(true)">U</button>
+                    <button class="btn btn-secondary" (click)="verticalMovement(false)">D</button>
+                    <button class="btn btn-secondary" (click)="horizontalMovement(false)">R</button>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="btn-group-vertical">
+                    <button class="btn btn-warning" (click)="accelerate(true)">INC</button>
+                    <button class="btn btn-warning" (click)="accelerate(false)">DEC</button>
+                  </div>
+                </div>
               </div>
-              <div class="btn-group-vertical">
-                <button class="btn btn-warning" (click)="accelerate(true)">INC</button>
-                <button class="btn btn-warning" (click)="accelerate(false)">DEC</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-info">
+              <div class="btn-group">
+                <button class="btn btn-success" (click)="openDoors(true)">left door</button>
+                <button class="btn btn-success" (click)="openDoors(false)">right door</button>
               </div>
             </div>
           </div>
@@ -71,7 +108,16 @@
       <div class="col">
         <div class="alert alert-info">
           <ul>
-            <li *ngFor="let item of cargo; let i = index"><h4>{{i + 1}}: {{item}}</h4></li>
+            <li *ngFor="let item of cargo; let i = index">
+              <div class="row">
+                <div class="col-11">
+                  <h4>{{i + 1}}: {{item}}</h4>
+                </div>
+                <div class="col-1">
+                  <button class="btn btn-danger btn-sm" (click)="unloadItem(i)">X</button>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
