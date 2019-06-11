@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="isFly === false">
           <div class="col">
             <div class="alert alert-info">
               <form (submit)="loadItem(cargoItem.value)">
@@ -51,6 +51,17 @@
                       <button class="btn btn-primary" type="submit">LOAD</button>
                     </div>
                   </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-info">
+              <form>
+                <div class="form-group">
+                  <input class="form-control" type="text" placeholder="input message" [(ngModel)]="info" name="carName">
                 </div>
               </form>
             </div>

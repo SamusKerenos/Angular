@@ -144,12 +144,7 @@ export class CarComponent implements OnInit {
   }
 
   loadItem(item: string) {
-    if (!this.isFly) {
-      this.cargo.push(item);
-    } else {
-      this.info = 'stop engin before load cargo';
-    }
-
+    this.cargo.push(item);
     return false; //if we don't return false from this function, we reload all page because we use this functuion in form
   }
 
