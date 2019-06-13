@@ -51,6 +51,14 @@ export class CarComponent implements OnInit {
       "rgh-56 engine parts",
       "dc-21 electronic components"
     ];
+
+    setInterval(()=>{
+      if (this.isFly) {
+        this.position.z = this.position.z + this.speed;
+      } else  {
+        this.position.z = this.position.z;
+      }
+    }, 1000);
   }
 
   fly() {
@@ -126,12 +134,6 @@ export class CarComponent implements OnInit {
       } else {
         this.info = 'vehicle still stay on ground, start engin before get down';
       }
-    }
-  }
-
-  moveForvard() {
-    if (this.isFly) {
-      this.position.z = this.position.z + this.speed;
     }
   }
 
