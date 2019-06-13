@@ -44,7 +44,10 @@ export class CarComponent implements OnInit {
     this.position = {
       x: this.fieldWidth / 2,
       y: 0,
-      z: 0
+      z: 0,
+      moveForvard: function(speed: number) {
+        this.z = this.z + speed;
+      },
     };
     this.cargo = [
       "r-12 power cell",
@@ -54,7 +57,7 @@ export class CarComponent implements OnInit {
 
     setInterval(()=>{
       if (this.isFly) {
-        this.position.z = this.position.z + this.speed;
+        this.position.moveForvard(this.speed);
       } else  {
         this.position.z = this.position.z;
       }
@@ -159,4 +162,5 @@ interface HasPosition {
   x: number,
   y: number,
   z: number,
+  moveForvard: (speed: number) => void,
 }
