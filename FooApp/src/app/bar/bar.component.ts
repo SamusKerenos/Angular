@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bar.component.css']
 })
 export class BarComponent implements OnInit {
+  items: string[];
 
   constructor() { }
 
   ngOnInit() {
+    this.items = [
+      "separilla",
+      "cola",
+      "ogange lemonade",
+      "fanta",
+      "red bull",
+      "monster",
+      "sunrise",
+      "ribosoma"
+    ];
   }
 
 }
