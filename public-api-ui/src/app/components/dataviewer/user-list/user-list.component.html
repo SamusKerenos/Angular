@@ -1,0 +1,20 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h2>Users</h2>
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="d-flex flex-wrap">
+    <div class="item-wrap" *ngFor="let user of (users$ | async)">
+      <app-user [user]=user></app-user>
+    </div>
+  </div>
+  <app-paginator
+    [page]="userPage$ | async"
+    [totalPage]="userTotalPage$ | async"
+    (next)="onNextUserPage()"
+    (previous)="onPreviousUserPage()">
+  </app-paginator>
+</mat-expansion-panel>

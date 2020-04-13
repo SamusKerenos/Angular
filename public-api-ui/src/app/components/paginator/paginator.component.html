@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-12 text-center">
+    <button
+      class="btn btn-light"
+      [disabled]="disableMovePrevious()"
+      (click)="previous.emit()">
+      previous
+    </button>
+    <span class="alert alert-light">&nbsp;page {{page}}&nbsp;</span>
+    <button
+      class="btn btn-light"
+      [disabled]="disableMoveNext()"
+      (click)="next.emit()">
+      next
+    </button>
+  </div>
+</div>

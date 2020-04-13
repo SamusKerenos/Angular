@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <h5>{{data}}</h5>
+    </div>
+    <div class="col-4 text-right">
+      <button class="btn btn-light" (click)="onCloseClick()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-12 text-left">
+      <a href="mailto: kunneron616@gmail.com?subject=Message&body={{data}}">Report</a>
+    </div>
+  </div>
+</div>
